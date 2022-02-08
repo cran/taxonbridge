@@ -28,6 +28,7 @@ get_validity <- function(x, rank = "family", valid = TRUE) {
   if (valid) {
     xout <- x[which(lgl_vec),] }
   else {xout <- x[which(!lgl_vec),] }
+  attr(xout, "got_validated") <- TRUE
   xout
 }
 
@@ -59,8 +60,6 @@ get_lineages <- function(x) {
 #' get_status(load_sample(), "synonym")
 #' get_status(load_sample(), c("accepted", "doubtful"))
 get_status <- function (x, status = "all") {
-  if (!dim(x)[2]==20) {
-    stop("Input data doesn't have the expected number of columns")}
   StatusVector <- c(tolower(status))
   if(!"all" %in% StatusVector) {
     GBIF_status <- c(NA, "doubtful", "accepted", "proparte synonym", "synonym", "homotypic synonym", "heterotypic synonym")
@@ -68,9 +67,85 @@ get_status <- function (x, status = "all") {
       stop(paste0("Status must be, and only be, one or more of: ", toString(GBIF_status)))
     }
     xout <- x[x$taxonomicStatus %in% StatusVector,]
+
   }
   else {
     xout <- x
+    message("No filtering argument was passed to get_status()")
   }
+  xout
+}
+
+#' Detect candidate inconsistencies and ambiguity
+#'
+#' @param x A list consisting of tibble(s) that have been passed to get_validated()
+#' @param uninomials A Boolean indicating whether uninomials should be included in the detection (defaults to TRUE)
+#'
+#' @return A character vector containing scientific names that exhibit inconsistency or ambiguity
+#' @export
+#'
+#' @examples
+#'sample <- load_sample()
+#'lineages <- get_lineages(sample)
+#'kingdom <- get_validity(lineages, rank = "kingdom", valid = FALSE)
+#'family <- get_validity(lineages, rank = "family", valid = FALSE)
+#'candidates <- list(kingdom, family)
+#'get_inconsistencies(candidates, uninomials = FALSE)
+get_inconsistencies <- function(x, uninomials = TRUE) {
+  canonicalName <- NULL
+  candidates <- lapply(x, function(y) dplyr::pull(y, canonicalName))
+  candidate_intersect <- Reduce(intersect, candidates)
+  if (!uninomials) {
+    xout <- candidate_intersect[which(purrr::map_dbl(strsplit(candidate_intersect, " "), length)>1)]
+  }
+  xout
+}
+
+#' A helper function to filter columns on GBIF taxa names
+#'
+#' @param x A tibble created with \code{load_taxonomies()} or \code{load_population()} or \code{load_sample()}.
+#' @param kingdom A string consisting of a scientific name
+#' @param phylum A string consisting of a scientific name
+#' @param class A string consisting of a scientific name
+#' @param order A string consisting of a scientific name
+#' @param family A string consisting of a scientific name
+#' @param genus A string consisting of a scientific name
+#' @param species A string consisting of a scientific name
+#'
+#' @return A filtered tibble
+#' @export
+#'
+#' @examples
+#' get_taxa(load_sample(), species = "hyalina")
+get_taxa <- function(x, kingdom=NA, phylum=NA, class=NA, order=NA, family=NA, genus=NA, species=NA) {
+  if (!is.na(kingdom)) {
+    x <- x[tolower(x$kingdom)==tolower(kingdom),]
+    x <- x[!is.na(x$kingdom),]
+  }
+  if (!is.na(phylum)) {
+    x <- x[tolower(x$phylum)==tolower(phylum),]
+    x <- x[!is.na(x$phylum),]
+  }
+  if (!is.na(class)) {
+    x <- x[tolower(x$class)==tolower(class),]
+    x <- x[!is.na(x$class),]
+  }
+  if (!is.na(order)) {
+    x <- x[tolower(x$order)==tolower(order),]
+    x <- x[!is.na(x$order),]
+  }
+  if (!is.na(family)) {
+    x <- x[tolower(x$family)==tolower(family),]
+    x <- x[!is.na(x$family),]
+  }
+  if (!is.na(genus)) {
+    x <- x[tolower(x$genericName)==tolower(genus),]
+    x <- x[!is.na(x$genericName),]
+  }
+  if (!is.na(species)) {
+    x <- x[tolower(x$specificEpithet)==tolower(species),]
+    x <- x[!is.na(x$specificEpithet),]
+  }
+  xout <- x
   xout
 }
