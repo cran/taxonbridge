@@ -4,18 +4,25 @@
 \alias{get_inconsistencies}
 \title{Detect candidate inconsistencies and ambiguity}
 \usage{
-get_inconsistencies(x, uninomials = TRUE)
+get_inconsistencies(x, uninomials = TRUE, set = "intersect")
 }
 \arguments{
-\item{x}{A list consisting of tibble(s) that have been passed to get_validated()}
+\item{x}{A \strong{list} consisting of tibble(s) that have been passed to \code{get_validated()}.}
 
-\item{uninomials}{A Boolean indicating whether uninomials should be included in the detection (defaults to TRUE)}
+\item{uninomials}{A logical indicating whether uninomials should be included in the detection (defaults to TRUE).}
+
+\item{set}{The type of set operation to be performed on x ("intersect", "union", or "setdiff"). Defaults to intersect.}
 }
 \value{
-A character vector containing scientific names that exhibit inconsistency or ambiguity
+A character vector containing scientific names that exhibit inconsistency or ambiguity.
 }
 \description{
 Detect candidate inconsistencies and ambiguity
+}
+\details{
+This method will return the intersect, union, or set difference of a list of
+tibbles, and is meant to be used on lists of tibbles that have already been
+processed with \code{get_validity ()}. Note: uninomials are single names (e.g., "Coenobitidae").
 }
 \examples{
 sample <- load_sample()
@@ -23,5 +30,5 @@ lineages <- get_lineages(sample)
 kingdom <- get_validity(lineages, rank = "kingdom", valid = FALSE)
 family <- get_validity(lineages, rank = "family", valid = FALSE)
 candidates <- list(kingdom, family)
-get_inconsistencies(candidates, uninomials = FALSE)
+get_inconsistencies(candidates, uninomials = FALSE, set = "intersect")
 }
