@@ -1,3 +1,10 @@
+# taxonbridge 1.0.4
+
+* Updated `get_validity()` method
+* Fixed bug in `load_taxonomies()` when reading in GBIF data with vroom
+* Updated vignette
+* Added `annotate()` method
+
 # taxonbridge 1.0.3
 
 * Updated v1.0.2 documentation
