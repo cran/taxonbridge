@@ -1,8 +1,8 @@
-f53ee66cebffb11c6524f0df50588f14 *DESCRIPTION
-2d246edff0269719baae6b76f4aa1584 *NAMESPACE
-af81ac1e2f748938d1f2b96a0f26ec94 *NEWS.md
+2ca3ff73f860a48452b7f5510041b4f5 *DESCRIPTION
+498b392fa6c504c7031d2a8b0360fceb *NAMESPACE
+5b23c27cc260d4e9238c057957cda099 *NEWS.md
 dd2a4833ca636c46aa12f2194a2eb423 *R/get_methods.R
-eb93442331666b95a23eac2e56002704 *R/helper_methods.R
+1f52f030c339a511527ec7980aee2b9e *R/helper_methods.R
 21c8a1972a180444ec644891f4c69465 *R/load_methods.R
 31130d856aff312b1eb88dea7de6e95b *R/plot_methods.R
 a8d1344ad8dbfa1869cf734163af7966 *R/prepare_methods.R
@@ -17,6 +17,7 @@ fb36ef694d76851c504492ce34306dbe *inst/extdata/NCBI_sample_1000.tsv.gz
 d107e7bea7b1a0dcb49c4bad65a78750 *inst/extdata/NCBI_stub.tsv
 4e09ba7a183712c483a193c180f39361 *inst/extdata/sample.tsv.gz
 4a9fe6c50bd2200f6f2ad0b23c19475e *man/annotate.Rd
+410d7aff35b5b3ccefbdbd42f24e969c *man/dedupe.Rd
 560bb326b657b42e0c47e66dcb5f8a6e *man/download_gbif.Rd
 ae3e2ca1f12b917c2b4c936a4942a1b6 *man/download_ncbi.Rd
 8035a94c4ab924528cbb49e54dceb431 *man/fuzzy_search.Rd
@@ -34,7 +35,7 @@ fa89d963f3ce46e08c8b2a7b1fc5a465 *man/prepare_rank_dist.Rd
 b568d87a79feb73bec12cd0abb96e559 *man/term_conversion.Rd
 faccd647d41853544c9a00654b435ba2 *tests/testthat.R
 7b07bd99c5d2a3c54a7448f91cb9e913 *tests/testthat/test-get_methods.R
-e9d06c988d1bbcb231c7e2e55073d03e *tests/testthat/test-helper_methods.R
+fded1964094d4a295a310f5103cc9fcc *tests/testthat/test-helper_methods.R
 d5a417cc41cdfa18c9ac58f3d87f8861 *tests/testthat/test-load_methods.R
 f31dba1ab58b39c7e25c900d8015ab8f *tests/testthat/test-plot_methods.R
 9fb7509f7ef586e4e6b99944480a9350 *tests/testthat/test-prepare_methods.R
