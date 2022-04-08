@@ -86,17 +86,22 @@ get_status <- function (x, status = "all") {
   xout
 }
 
-#' Detect candidate inconsistencies and ambiguity
+#' Detect candidate inconsistencies and ambiguity between NCBI and GBIF data
 #'
-#' @param x A **list** consisting of tibble(s) that have been passed to `get_validated()`.
-#' @param uninomials A logical indicating whether uninomials should be included in the detection (defaults to TRUE).
-#' @param set The type of set operation to be performed on x ("intersect", "union", or "setdiff"). Defaults to intersect.
+#' @param x A **list** consisting of two tibbles of different ranks that have been passed to `get_validated(..., rank = ...)`.
+#' @param uninomials A logical indicating whether uninomials should be included in the detection. Defaults to TRUE.
+#' Note: uninomials are single names (e.g., "Coenobitidae").
+#' @param set The type of set operation to be performed on `x` ("intersect", "union", or "setdiff").
+#' Defaults to intersect. Note: the set difference ("setdiff") argument is order dependent.
 #'
 #' @return A character vector containing scientific names that exhibit inconsistency or ambiguity.
 #'
-#' @details This method will return the intersect, union, or set difference of a list of
+#' @details This method will return the intersect, union, or set difference of a list of two
 #' tibbles, and is meant to be used on lists of tibbles that have already been
-#' processed with `get_validity()`. Note: uninomials are single names (e.g., "Coenobitidae").
+#' processed with `get_validity()`. A list consisting of a single tibble may be passed to this method for the
+#' purpose of retrieving a character vector containing scientific names, however, set operations do not apply
+#' to lists consisting of single tibbles.
+#'
 #'
 #' @export
 #'
@@ -134,7 +139,7 @@ get_inconsistencies <- function(x, uninomials = TRUE, set = "intersect") {
   xout
 }
 
-#' A helper function to filter columns on GBIF taxa names
+#' A helper function to filter on GBIF taxa names
 #'
 #' @param x A tibble created with \code{load_taxonomies()} or \code{load_population()} or \code{load_sample()}.
 #' @param kingdom A string consisting of a scientific name.
@@ -152,33 +157,32 @@ get_inconsistencies <- function(x, uninomials = TRUE, set = "intersect") {
 #' get_taxa(load_sample(), species = "hyalina")
 get_taxa <- function(x, kingdom=NA, phylum=NA, class=NA, order=NA, family=NA, genus=NA, species=NA) {
   if (!is.na(kingdom)) {
-    x <- x[tolower(x$kingdom)==tolower(kingdom),]
-    x <- x[!is.na(x$kingdom),]
+    k <- kingdom
+    x <- dplyr::filter(x, tolower(x$kingdom)==tolower(k)|tolower(x$ncbi_kingdom)==tolower(k))
   }
   if (!is.na(phylum)) {
-    x <- x[tolower(x$phylum)==tolower(phylum),]
-    x <- x[!is.na(x$phylum),]
+    p <- phylum
+    x <- dplyr::filter(x, tolower(x$phylum)==tolower(p)|tolower(x$ncbi_phylum)==tolower(p))
   }
   if (!is.na(class)) {
-    x <- x[tolower(x$class)==tolower(class),]
-    x <- x[!is.na(x$class),]
+    c <- class
+    x <- dplyr::filter(x, tolower(x$class)==tolower(c)|tolower(x$ncbi_class)==tolower(c))
   }
   if (!is.na(order)) {
-    x <- x[tolower(x$order)==tolower(order),]
-    x <- x[!is.na(x$order),]
+    o <- order
+    x <- dplyr::filter(x, tolower(x$order)==tolower(o)|tolower(x$ncbi_order)==tolower(o))
   }
   if (!is.na(family)) {
-    x <- x[tolower(x$family)==tolower(family),]
-    x <- x[!is.na(x$family),]
+    f <- family
+    x <- dplyr::filter(x, tolower(x$family)==tolower(f)|tolower(x$ncbi_family)==tolower(f))
   }
   if (!is.na(genus)) {
-    x <- x[tolower(x$genericName)==tolower(genus),]
-    x <- x[!is.na(x$genericName),]
+    g <- genus
+    x <- dplyr::filter(x, tolower(x$genericName)==tolower(g)|tolower(x$ncbi_genus)==tolower(g))
   }
   if (!is.na(species)) {
-    x <- x[tolower(x$specificEpithet)==tolower(species),]
-    x <- x[!is.na(x$specificEpithet),]
+    s <- species
+    x <- dplyr::filter(x, tolower(x$specificEpithet)==tolower(s)|tolower(x$ncbi_species)==tolower(s))
   }
-  xout <- x
-  xout
+  x
 }

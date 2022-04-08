@@ -6,9 +6,8 @@
 #' @return A tibble containing merged GBIF and NCBI taxonomic data.
 #'
 #' @details
-#' This method parses and merges a GBIF `Taxon.tsv` file (see `download_gbif()`) and
-#' a Taxonkit (\url{https://bioinf.shenwei.me/taxonkit/download/}) output file obtained by running: `taxonkit list --ids 1 | taxonkit lineage
-#' --show-lineage-taxids --show-lineage-ranks --show-rank --show-name > All.lineages.tsv` on NCBI data dump files (see `download_ncbi()`).
+#' This method merges a GBIF `Taxon.tsv` file (see `download_gbif()`) and
+#' a Taxonkit (\url{https://bioinf.shenwei.me/taxonkit/download/}) output file (see `download_ncbi()`).
 #'
 #' @export
 #'
@@ -19,7 +18,13 @@ load_taxonomies <- function(GBIF_path, NCBI_path) {
 
   #Load NCBI data:
   NCBI <- vroom::vroom(NCBI_path, na = "", col_names = FALSE, show_col_types = FALSE)
-  colnames(NCBI) <- c("ncbi_id","ncbi_lineage_names", "ncbi_lineage_ids", "canonicalName", "ncbi_rank", "ncbi_lineage_ranks")
+  NCBI_col7 <- do.call(rbind, stringr::str_split(NCBI$X7, ";"))
+  NCBI <- cbind(NCBI[,1:6], NCBI_col7)
+  NCBI <- dplyr::mutate_all(NCBI, list(~dplyr::na_if(.,"")))
+  remove(NCBI_col7)
+  colnames(NCBI) <- c("ncbi_id","ncbi_lineage_names", "ncbi_lineage_ids", "canonicalName",
+                      "ncbi_rank", "ncbi_lineage_ranks", "ncbi_kingdom", "ncbi_phylum",
+                      "ncbi_class", "ncbi_order", "ncbi_family", "ncbi_genus", "ncbi_species")
   NCBI$canonicalName <- as.character(NCBI$canonicalName)
   NCBI_all_rows <- nrow(NCBI)
   NCBI_data <- NCBI[!is.na(NCBI$canonicalName),]
@@ -68,14 +73,16 @@ load_taxonomies <- function(GBIF_path, NCBI_path) {
 #' @examples
 #' \dontrun{load_population("path/to/merged_taxonomies")}
 load_population <- function(x) {
-  vroom::vroom(x, na = "", show_col_types = FALSE)
+  vroom::vroom(x, show_col_types = FALSE)
 }
 
-#' Load a sample of previously merged GBIF and NCBI taxonomies
+#' Load an example of previously merged GBIF and NCBI taxonomies
 #'
 #' @return A tibble containing a sample of merged GBIF and NCBI taxonomic data.
 #' @details
-#' This method returns a small subset of previously merged GBIF and NCBI taxonomies.
+#' This method returns a small subset of previously merged GBIF and NCBI taxonomies. The
+#' subset is an example dataset that is only meant to be used to familiarize yourself
+#' with `taxonbridge` methods.
 #' @export
 #'
 #' @examples
@@ -95,10 +102,14 @@ load_sample <- function() {
 #'@details
 #' This method downloads a NCBI taxonomy archive file to a temporary directory,
 #' extracts four files (`nodes.dmp`, `names.dmp`, `merged.dmp` and `deleted.dmp`)
-#' from the downloaded archive file, and then removes the archive file. If the path
-#' to a `Taxonkit` installation is supplied, `Taxonkit` is called and the location of
-#' the four files is passed to `Taxonkit` as an argument. Output is saved in the same
-#' temporary folder in a file called `All.lineages.tsv`.
+#' from the downloaded archive file, and then removes the archive file. Further parsing of
+#' these four files must be carried out with Taxonkit (\url{https://bioinf.shenwei.me/taxonkit/download/}),
+#' either automatically or manually. If the path to a Taxonkit installation is supplied, Taxonkit is
+#' called and the location of the four files is passed to Taxonkit as an argument for automatic parsing.
+#' Taxonkit output is saved in the same temporary folder in a file called `All.lineages.tsv`.
+#' If the path to Taxonkit is not supplied, parsing should be carried out manually using the command:
+#' `taxonkit list --ids 1 | taxonkit lineage --show-lineage-taxids --show-lineage-ranks --show-rank
+#' --show-name --data-dir=path/to/downloaded/files | taxonkit reformat > All.lineages.tsv`
 #'
 #' @export
 #'
@@ -132,7 +143,10 @@ download_ncbi <- function(taxonkitpath = NA) {
   message("NCBI data dump has been downloaded and extracted.")
   if (!is.na(taxonkitpath)) { tryCatch(
       expr = {
-        system(paste0("cd ", td,";",taxonkitpath," --data-dir=", file.path(td) ," list --ids 1 | ",taxonkitpath ," lineage --show-lineage-taxids --show-lineage-ranks --show-rank --show-name --data-dir=", file.path(td) ," > All.lineages.tsv"))
+        system(paste0("cd ", td,";",taxonkitpath," --data-dir=",
+                      file.path(td) ," list --ids 1 | ",taxonkitpath ,
+                      " lineage --show-lineage-taxids --show-lineage-ranks --show-rank --show-name --data-dir=",
+                      file.path(td) ," | ",taxonkitpath ," reformat > All.lineages.tsv"), ignore.stderr = TRUE)
         unlink(tf)
         message("NCBI files parsed and result saved.")
         location <- file.path(td, "All.lineages.tsv")

@@ -66,11 +66,55 @@ plot_mdb(GBIF_dist)
 plot_mdb(NCBI_dist)
 
 ## ---- include=TRUE, message=TRUE----------------------------------------------
-get_validity(decapoda, valid = FALSE)
+get_validity(lineages, valid = FALSE)
 
 ## ---- include=TRUE, message=TRUE----------------------------------------------
-decapoda <- annotate(decapoda, get_validity(decapoda, valid = FALSE)$canonicalName,
+decapoda <- annotate(decapoda, get_validity(lineages, valid = FALSE)$canonicalName,
                     new_column = "family_inconsistencies", present = 1)
 colnames(decapoda)
 decapoda[!is.na(decapoda$family_inconsistencies),"canonicalName"]
+
+## ---- include=TRUE,eval = FALSE-----------------------------------------------
+#  library(taxonbridge)
+#  
+#  #Retrieve and merge NCBI and GBIF data. INSERT PATH TO YOUR TAXONKIT INSTALLATION.
+#  custom_taxonomy <- load_taxonomies(download_gbif(),
+#                                     download_ncbi(taxonkitpath = "/path/to/taxonkit"))
+#  
+#  #Create a custom taxonomy of all gastropods
+#  custom_taxonomy <- get_taxa(custom_taxonomy, class = "gastropoda")
+#  remove(dt)
+#  
+#  #Use fuzzy_search to find occurrences of the names within the custom taxonomy
+#  search_result <- c()
+#  sp_names <- c("Natica sp", "Conus sp")
+#  for (i in sp_names) {
+#    iter <- fuzzy_search(custom_taxonomy, i, allow_term_removal = TRUE)
+#    search_result <- c(search_result, iter)
+#  }
+#  exact_names <- c("Polinices mammillata", "Cymatium pileare",
+#                   "Chicoreus ramosus", "Murex tenuirostris","Vasum turbinellum",
+#                   "Oliva amethystina", "Mitra mitra", "Nassa serta",
+#                   "Phos senticosus")
+#  for (i in exact_names) {
+#    iter <- fuzzy_search(custom_taxonomy, i, allow_term_removal = FALSE)
+#    search_result <- c(search_result, iter)
+#  }
+#  
+#  #Annotate the custom taxonomy
+#  custom_taxonomy <- annotate(custom_taxonomy, names = search_result, new_column = "cone_snails")
+#  
+#  #Filter on the annotation
+#  custom_taxonomy <- custom_taxonomy[!is.na(custom_taxonomy$cone_snails),]
+#  
+#  #De-duplicate the custom taxonomy
+#  custom_taxonomy <- dedupe(custom_taxonomy, ranked = TRUE)
+#  
+#  #Create a subset of relevant data
+#  custom_taxonomy_short <- custom_taxonomy[, c(1,17,2,3,20,7)]
+#  colnames(custom_taxonomy_short) <- c("GBIF_id", "NCBI_id", "species_name",
+#                                       "GBIF_rank", "NCBI_rank", "taxonomic_status")
+#  
+#  #Print the results to the terminal
+#  print(custom_taxonomy_short, n=100)
 
