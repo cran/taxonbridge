@@ -205,8 +205,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;taxonomicStatus&quot;      &quot;kingdom&quot;              &quot;phylum&quot;              </span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] &quot;class&quot;                &quot;order&quot;                &quot;family&quot;              </span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] &quot;genericName&quot;          &quot;specificEpithet&quot;      &quot;infraspecificEpithet&quot;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;ncbi_id&quot;              &quot;ncbi_lineage_names&quot;   &quot;ncbi_lineage_ids&quot;    </span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] &quot;ncbi_rank&quot;            &quot;ncbi_lineage_ranks&quot;   &quot;from_GBIF&quot;           </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;from_GBIF&quot;            &quot;ncbi_id&quot;              &quot;ncbi_lineage_names&quot;  </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] &quot;ncbi_lineage_ids&quot;     &quot;ncbi_rank&quot;            &quot;ncbi_lineage_ranks&quot;  </span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [22] &quot;ncbi_kingdom&quot;         &quot;ncbi_phylum&quot;          &quot;ncbi_class&quot;          </span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] &quot;ncbi_order&quot;           &quot;ncbi_family&quot;          &quot;ncbi_genus&quot;          </span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [28] &quot;ncbi_species&quot;         &quot;from_NCBI&quot;            &quot;swimming_crabs&quot;</span></span></code></pre></div>
@@ -260,18 +260,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now that both the GBIF and NCBI data have lineage information, the validity of the lineage information can be accessed in the same way as was done in example 1:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_validity</span>(lineages, <span class="at">valid =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 30</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    taxonID canonicalName         taxonRank parentNameUsageID acceptedNameUsageID</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt;                 &lt;dbl&gt;               &lt;dbl&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 11343777 Orithyia              genus                  6316             2117279</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2221665 Palibythus magnificus species             2221664                  NA</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2226015 Lysirude              genus               6927319                  NA</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more variables: originalNameUsageID &lt;dbl&gt;, taxonomicStatus &lt;chr&gt;,</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   taxonID  canonicalName         taxonRank parentNameUsageID acceptedNameUsageID</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;              </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 11343777 Orithyia              genus     6316              2117279            </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2221665  Palibythus magnificus species   2221664           &lt;NA&gt;               </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2226015  Lysirude              genus     6927319           &lt;NA&gt;               </span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 25 more variables: originalNameUsageID &lt;chr&gt;, taxonomicStatus &lt;chr&gt;,</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   kingdom &lt;chr&gt;, phylum &lt;chr&gt;, class &lt;chr&gt;, order &lt;chr&gt;, family &lt;chr&gt;,</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   genericName &lt;chr&gt;, specificEpithet &lt;chr&gt;, infraspecificEpithet &lt;chr&gt;,</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ncbi_id &lt;dbl&gt;, ncbi_lineage_names &lt;chr&gt;, ncbi_lineage_ids &lt;chr&gt;,</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ncbi_rank &lt;chr&gt;, ncbi_lineage_ranks &lt;chr&gt;, from_GBIF &lt;dbl&gt;,</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   from_GBIF &lt;chr&gt;, ncbi_id &lt;chr&gt;, ncbi_lineage_names &lt;chr&gt;,</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ncbi_lineage_ids &lt;chr&gt;, ncbi_rank &lt;chr&gt;, ncbi_lineage_ranks &lt;chr&gt;,</span></span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ncbi_kingdom &lt;chr&gt;, ncbi_phylum &lt;chr&gt;, ncbi_class &lt;chr&gt;, ncbi_order &lt;chr&gt;,</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ncbi_family &lt;chr&gt;, ncbi_genus &lt;chr&gt;, ncbi_species &lt;chr&gt;, from_NCBI &lt;dbl&gt;, …</span></span></code></pre></div>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ncbi_family &lt;chr&gt;, ncbi_genus &lt;chr&gt;, ncbi_species &lt;chr&gt;, from_NCBI &lt;chr&gt;, …</span></span></code></pre></div>
 <p>Three entries have invalid data:</p>
 <ul>
 <li><p>The genus <em>Orithyia</em> belongs to the family Phoxichilidiidae in the GBIF but belongs to the family Orithyiidae in the NCBI.</p></li>
@@ -288,8 +288,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;taxonomicStatus&quot;        &quot;kingdom&quot;                &quot;phylum&quot;                </span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] &quot;class&quot;                  &quot;order&quot;                  &quot;family&quot;                </span></span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] &quot;genericName&quot;            &quot;specificEpithet&quot;        &quot;infraspecificEpithet&quot;  </span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;ncbi_id&quot;                &quot;ncbi_lineage_names&quot;     &quot;ncbi_lineage_ids&quot;      </span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] &quot;ncbi_rank&quot;              &quot;ncbi_lineage_ranks&quot;     &quot;from_GBIF&quot;             </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;from_GBIF&quot;              &quot;ncbi_id&quot;                &quot;ncbi_lineage_names&quot;    </span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] &quot;ncbi_lineage_ids&quot;       &quot;ncbi_rank&quot;              &quot;ncbi_lineage_ranks&quot;    </span></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [22] &quot;ncbi_kingdom&quot;           &quot;ncbi_phylum&quot;            &quot;ncbi_class&quot;            </span></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] &quot;ncbi_order&quot;             &quot;ncbi_family&quot;            &quot;ncbi_genus&quot;            </span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [28] &quot;ncbi_species&quot;           &quot;from_NCBI&quot;              &quot;swimming_crabs&quot;        </span></span>
@@ -314,40 +314,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a custom taxonomy of all gastropods</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> <span class="fu">get_taxa</span>(custom_taxonomy, <span class="at">class =</span> <span class="st">&quot;gastropoda&quot;</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(dt)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Use fuzzy_search to find occurrences of the names within the custom taxonomy</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>search_result <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>sp_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Natica sp&quot;</span>, <span class="st">&quot;Conus sp&quot;</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> sp_names) {</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="fu">fuzzy_search</span>(custom_taxonomy, i, <span class="at">allow_term_removal =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  search_result <span class="ot">&lt;-</span> <span class="fu">c</span>(search_result, iter)</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>exact_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Polinices mammillata&quot;</span>, <span class="st">&quot;Cymatium pileare&quot;</span>,</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Chicoreus ramosus&quot;</span>, <span class="st">&quot;Murex tenuirostris&quot;</span>,<span class="st">&quot;Vasum turbinellum&quot;</span>,</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Oliva amethystina&quot;</span>, <span class="st">&quot;Mitra mitra&quot;</span>, <span class="st">&quot;Nassa serta&quot;</span>,</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Phos senticosus&quot;</span>)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> exact_names) {</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="fu">fuzzy_search</span>(custom_taxonomy, i, <span class="at">allow_term_removal =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  search_result <span class="ot">&lt;-</span> <span class="fu">c</span>(search_result, iter)</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#Annotate the custom taxonomy</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> <span class="fu">annotate</span>(custom_taxonomy, <span class="at">names =</span> search_result, <span class="at">new_column =</span> <span class="st">&quot;cone_snails&quot;</span>)</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter on the annotation</span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> custom_taxonomy[<span class="sc">!</span><span class="fu">is.na</span>(custom_taxonomy<span class="sc">$</span>cone_snails),]</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">#De-duplicate the custom taxonomy</span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> <span class="fu">dedupe</span>(custom_taxonomy, <span class="at">ranked =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a subset of relevant data</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>custom_taxonomy_short <span class="ot">&lt;-</span> custom_taxonomy[, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">17</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">20</span>,<span class="dv">7</span>)]</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(custom_taxonomy_short) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GBIF_id&quot;</span>, <span class="st">&quot;NCBI_id&quot;</span>, <span class="st">&quot;species_name&quot;</span>, </span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;GBIF_rank&quot;</span>, <span class="st">&quot;NCBI_rank&quot;</span>, <span class="st">&quot;taxonomic_status&quot;</span>)</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="co">#Print the results to the terminal</span></span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(custom_taxonomy_short, <span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Use fuzzy_search to find occurrences of the names within the custom taxonomy</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>search_result <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>sp_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Natica sp&quot;</span>, <span class="st">&quot;Conus sp&quot;</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> sp_names) {</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="fu">fuzzy_search</span>(custom_taxonomy, i, <span class="at">allow_term_removal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  search_result <span class="ot">&lt;-</span> <span class="fu">c</span>(search_result, iter)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>exact_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Polinices mammillata&quot;</span>, <span class="st">&quot;Cymatium pileare&quot;</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Chicoreus ramosus&quot;</span>, <span class="st">&quot;Murex tenuirostris&quot;</span>,<span class="st">&quot;Vasum turbinellum&quot;</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Oliva amethystina&quot;</span>, <span class="st">&quot;Mitra mitra&quot;</span>, <span class="st">&quot;Nassa serta&quot;</span>,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Phos senticosus&quot;</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> exact_names) {</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="fu">fuzzy_search</span>(custom_taxonomy, i, <span class="at">allow_term_removal =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  search_result <span class="ot">&lt;-</span> <span class="fu">c</span>(search_result, iter)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Annotate the custom taxonomy</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> <span class="fu">annotate</span>(custom_taxonomy, <span class="at">names =</span> search_result, <span class="at">new_column =</span> <span class="st">&quot;cone_snails&quot;</span>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter on the annotation</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> custom_taxonomy[<span class="sc">!</span><span class="fu">is.na</span>(custom_taxonomy<span class="sc">$</span>cone_snails),]</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co">#De-duplicate the custom taxonomy</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>custom_taxonomy <span class="ot">&lt;-</span> <span class="fu">dedupe</span>(custom_taxonomy, <span class="at">ranked =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a subset of relevant data</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>custom_taxonomy_short <span class="ot">&lt;-</span> custom_taxonomy[, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">17</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">20</span>,<span class="dv">7</span>)]</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(custom_taxonomy_short) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GBIF_id&quot;</span>, <span class="st">&quot;NCBI_id&quot;</span>, <span class="st">&quot;species_name&quot;</span>, </span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;GBIF_rank&quot;</span>, <span class="st">&quot;NCBI_rank&quot;</span>, <span class="st">&quot;taxonomic_status&quot;</span>)</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co">#Print the results to the terminal</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(custom_taxonomy_short, <span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div>
 <p>The above script will return a tibble of candidate cone snails with their associated NCBI and GBIF identifiers as well as their associated taxonomic statuses. Since the fuzzy search method was used, each entry should be manually assessed to rule out false positives.</p>
 </div>
 

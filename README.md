@@ -36,22 +36,54 @@ library(taxonbridge)
 
 ## Available methods and how to use them
 
-See the `taxonbridge` [documentation](https://rdocumentation.org/packages/taxonbridge/) and [workflow](https://github.com/MoultDB/taxonbridge/blob/master/taxonbridge_workflow.pdf).
+See the `taxonbridge` [documentation](https://rdocumentation.org/packages/taxonbridge/) for detailed descriptions of the available methods and see the [workflow](https://github.com/MoultDB/taxonbridge/blob/master/taxonbridge_workflow.pdf) for how to use the methods. Custom taxonomies in `taxonbridge` always have the following 29 columns. All columns have the character data type. Column names with links are GBIF column names that are also [Darwin Core controlled vocabulary terms](https://dwc.tdwg.org).
+
+Column name  		 	| Description
+-----------------------	| -------------
+[taxonID](https://dwc.tdwg.org/terms/)				 	| GBIF identifier
+canonicalName		 	| GBIF/NCBI scientific name 
+[taxonRank](https://dwc.tdwg.org/terms/)			 	| GBIF rank
+[parentNameUsageID](https://dwc.tdwg.org/terms/)	 	| GBIF parent ID
+[acceptedNameUsageID](https://dwc.tdwg.org/terms/)	 	| GBIF accepted ID
+[originalNameUsageID](https://dwc.tdwg.org/terms/)	 	| GBIF original ID
+[taxonomicStatus](https://dwc.tdwg.org/terms/)		 	| GBIF taxonomic status
+[kingdom](https://dwc.tdwg.org/terms/)  			 	| GBIF kingdom name
+[phylum](https://dwc.tdwg.org/terms/)  			 	| GBIF phylum name
+[class](https://dwc.tdwg.org/terms/)  				 	| GBIF class name
+[order](https://dwc.tdwg.org/terms/) 				 	| GBIF order name
+[family](https://dwc.tdwg.org/terms/)  			 	| GBIF family name
+[genericName](https://dwc.tdwg.org/terms/)  		 	| GBIF genus name
+[specificEpithet](https://dwc.tdwg.org/terms/) 	    | GBIF species name
+[infraspecificEpithet](https://dwc.tdwg.org/terms/)	| GBIF subspecies name	
+from_GBIF 			 	| GBIF provenance indicator	
+ncbi_id  				| NCBI identifier			
+ncbi_lineage_names 		| NCBI full lineage names
+ncbi_lineage_ids		| NCBI full lineage IDs
+ncbi_rank  				| NCBI rank
+ncbi_lineage_ranks		| NCBI full lineage ranks
+ncbi_kingdom			| NCBI kingdom name
+ncbi_phylum				| NCBI phylum name
+ncbi_class				| NCBI class name
+ncbi_order				| NCBI order name
+ncbi_family				| NCBI family name
+ncbi_genus				| NCBI genus name
+ncbi_species			| NCBI species name
+from_NCBI				| NCBI provenance indicator
 
 ## Examples
 
-A 2000-row example subset of a previously merged taxonomy is bundled with `taxonbridge` and can be loaded as follow:
+A 2000 row example subset of a previously merged taxonomy is bundled with `taxonbridge` and can be loaded as follow:
 
 ``` r
 library(taxonbridge)
-example <- load_sample()
+example_1 <- load_sample()
 ```
 
 Want to try more than a sample? [Download](https://drive.google.com/file/d/1gpvm9QKdOcuGo_cIXPkAgGlB-qfKZZU6/view?usp=sharing) a larger dataset and load it as follow:
 
 ``` r
 library(taxonbridge)
-load_population("path/to/downloaded/dataset")
+example_2 <- load_population("path/to/downloaded/dataset")
 ```
 You can also prepare a dataset yourself which requires the use of external data and software. The most current NCBI and GBIF taxonomic data can be downloaded as follow:
 
@@ -60,7 +92,7 @@ download_gbif()
 download_ncbi()
 ```
 
-Once the downloads are complete, the paths to the downloaded files will be reported to your terminal. A single file is downloaded from the GBIF (`Taxon.tsv`) while four files are downloaded from the NCBI (`nodes.dmp`, `names.dmp`,`delnodes.dmp` and `merged.dmp`). Take note of the location of these files. The NCBI files require further parsing with [Taxonkit](https://bioinf.shenwei.me/taxonkit/download/). Read the `download_ncbi()` [documentation](https://rdocumentation.org/packages/taxonbridge/) for instructions on how to parse the NCBI files.
+Once the downloads are complete, the paths to the downloaded files will be reported to your terminal. A single file is downloaded from the GBIF (`Taxon.tsv`) while four files are downloaded from the NCBI (`nodes.dmp`, `names.dmp`, `delnodes.dmp` and `merged.dmp`). Take note of the location of these files. The NCBI files require further parsing with [Taxonkit](https://bioinf.shenwei.me/taxonkit/download/). Read the `download_ncbi()` [documentation](https://rdocumentation.org/packages/taxonbridge/) for instructions on how to parse the NCBI files.
 
 Downloading the GBIF and NCBI taxonomic data, parsing the NCBI files, and merging the taxonomies can easily be carried out in one command if [Taxonkit](https://bioinf.shenwei.me/taxonkit/download/) is already installed on your system: 
 ``` r
@@ -74,4 +106,4 @@ See the [workflow](https://github.com/MoultDB/taxonbridge/blob/master/taxonbridg
 
 [Global Biodiversity Information Facility (GBIF) backbone taxonomy](https://hosted-datasets.gbif.org/datasets/backbone/current/)
 
-[National Centre for Biotechnology Information (NCBI) taxonomy](https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/)
+[National Center for Biotechnology Information (NCBI) taxonomy](https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/)

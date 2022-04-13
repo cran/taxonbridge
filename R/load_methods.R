@@ -17,7 +17,7 @@
 load_taxonomies <- function(GBIF_path, NCBI_path) {
 
   #Load NCBI data:
-  NCBI <- vroom::vroom(NCBI_path, na = "", col_names = FALSE, show_col_types = FALSE)
+  NCBI <- vroom::vroom(NCBI_path, na = "", col_names = FALSE, col_types = vroom::cols(.default = "c"))
   NCBI_col7 <- do.call(rbind, stringr::str_split(NCBI$X7, ";"))
   NCBI <- cbind(NCBI[,1:6], NCBI_col7)
   NCBI <- dplyr::mutate_all(NCBI, list(~dplyr::na_if(.,"")))
@@ -25,19 +25,17 @@ load_taxonomies <- function(GBIF_path, NCBI_path) {
   colnames(NCBI) <- c("ncbi_id","ncbi_lineage_names", "ncbi_lineage_ids", "canonicalName",
                       "ncbi_rank", "ncbi_lineage_ranks", "ncbi_kingdom", "ncbi_phylum",
                       "ncbi_class", "ncbi_order", "ncbi_family", "ncbi_genus", "ncbi_species")
-  NCBI$canonicalName <- as.character(NCBI$canonicalName)
   NCBI_all_rows <- nrow(NCBI)
   NCBI_data <- NCBI[!is.na(NCBI$canonicalName),]
-  NCBI_data$from_NCBI <- 1
+  NCBI_data$from_NCBI <- as.character(1)
   NCBI_filtered_rows <- nrow(NCBI_data)
 
   #Load GBIF data:
-  GBIF <- vroom::vroom(GBIF_path, show_col_types = FALSE, quote = "")
+  GBIF <- vroom::vroom(GBIF_path, col_types = vroom::cols(.default = "c"), quote = "")
   GBIF <- GBIF[,c(1, 8, 12, 3:5, 15, 18:22, 9:11)]
-  GBIF$canonicalName <- as.character(GBIF$canonicalName)
   GBIF_all_rows <- nrow(GBIF)
   GBIF_data <- GBIF[!is.na(GBIF$canonicalName),]
-  GBIF_data$from_GBIF <- 1
+  GBIF_data$from_GBIF <- as.character(1)
   GBIF_filtered_rows <- nrow(GBIF_data)
 
   #Merge GBIF and NCBI on “canonicalName" having a value
@@ -73,7 +71,7 @@ load_taxonomies <- function(GBIF_path, NCBI_path) {
 #' @examples
 #' \dontrun{load_population("path/to/merged_taxonomies")}
 load_population <- function(x) {
-  vroom::vroom(x, show_col_types = FALSE)
+  vroom::vroom(x, show_col_types = FALSE, col_types = vroom::cols(.default = "c"))
 }
 
 #' Load an example of previously merged GBIF and NCBI taxonomies
@@ -89,7 +87,19 @@ load_population <- function(x) {
 #' load_sample()
 load_sample <- function() {
   sample_data <- system.file("extdata", "sample.tsv.gz", package = "taxonbridge", mustWork = TRUE)
-  vroom::vroom(sample_data, na = "", show_col_types = FALSE)
+  x <- vroom::vroom(sample_data, na = "", col_types = vroom::cols(.default = "c"))
+  message("\n#####  ##   #    #   ###   #    #  ####   ####   #####  ####    #####  #####")
+  message("  #   #  #   #  #   #   #  ##   #  #   #  #   #    #    #   #   #      #    ")
+  message("  #   ####    #     #   #  # #  #  #####  #####    #    #    #  #  ##  #####")
+  message("  #   #  #   #  #   #   #  #  # #  #   #  #  #     #    #   #   #   #  #    ")
+  message("  #   #  #  #    #   ###   #    #  ####   #   #  #####  ####    #####  #####\n")
+  message("A sample containing 2000 rows by 29 columns has been loaded.")
+  message("Visit the following links to learn more about Taxonbridge:")
+  message("https://github.com/MoultDB/taxonbridge#available-methods-and-how-to-use-them")
+  message("https://github.com/MoultDB/taxonbridge/blob/master/taxonbridge_workflow.pdf")
+  message("https://rdocumentation.org/packages/taxonbridge/")
+  message("https://CRAN.R-project.org/package=taxonbridge")
+  x
 }
 
 #' Download the NCBI taxonomy
@@ -101,7 +111,7 @@ load_sample <- function() {
 #'
 #'@details
 #' This method downloads a NCBI taxonomy archive file to a temporary directory,
-#' extracts four files (`nodes.dmp`, `names.dmp`, `merged.dmp` and `deleted.dmp`)
+#' extracts four files (`nodes.dmp`, `names.dmp`, `merged.dmp` and `delnodes.dmp`)
 #' from the downloaded archive file, and then removes the archive file. Further parsing of
 #' these four files must be carried out with Taxonkit (\url{https://bioinf.shenwei.me/taxonkit/download/}),
 #' either automatically or manually. If the path to a Taxonkit installation is supplied, Taxonkit is

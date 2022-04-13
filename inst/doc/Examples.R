@@ -83,7 +83,6 @@ decapoda[!is.na(decapoda$family_inconsistencies),"canonicalName"]
 #  
 #  #Create a custom taxonomy of all gastropods
 #  custom_taxonomy <- get_taxa(custom_taxonomy, class = "gastropoda")
-#  remove(dt)
 #  
 #  #Use fuzzy_search to find occurrences of the names within the custom taxonomy
 #  search_result <- c()

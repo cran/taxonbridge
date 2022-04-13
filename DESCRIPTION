@@ -1,7 +1,7 @@
 Package: taxonbridge
 Title: Create Custom Taxonomies Based on the NCBI Taxonomy and GBIF
         Backbone Taxonomy
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: 
     person("Werner", "Veldsman", , "wernerpieter.veldsman@unil.ch", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9837-8332"))
@@ -20,8 +20,8 @@ Imports: purrr, dplyr, vroom, ggplot2, rje, withr, utils, stringr
 Depends: R (>= 2.10)
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-04-08 13:36:06 UTC; wernerveldsman
+Packaged: 2022-04-13 11:00:59 UTC; wernerveldsman
 Author: Werner Veldsman [aut, cre] (<https://orcid.org/0000-0001-9837-8332>)
 Maintainer: Werner Veldsman <wernerpieter.veldsman@unil.ch>
 Repository: CRAN
-Date/Publication: 2022-04-08 13:50:02 UTC
+Date/Publication: 2022-04-13 11:30:02 UTC
