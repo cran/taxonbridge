@@ -1,12 +1,12 @@
-4b97a8da70f253552a454046861170e6 *DESCRIPTION
+b93dbee4f8d188b9799e5176a4d639a9 *DESCRIPTION
 498b392fa6c504c7031d2a8b0360fceb *NAMESPACE
-f2bedf105c148b2f8a40264370318667 *NEWS.md
+d15824c901fc05dc9f3b1a8b399b7ec1 *NEWS.md
 761ce2e64fddc51ce1ac10b7e0edc272 *R/get_methods.R
 f8768b434dd25b8129d564e9a69fb868 *R/helper_methods.R
-353ee8983ccd3df49a7206da148c2f15 *R/load_methods.R
+c75e7629489f7dde378484e403a006e4 *R/load_methods.R
 31130d856aff312b1eb88dea7de6e95b *R/plot_methods.R
 a8d1344ad8dbfa1869cf734163af7966 *R/prepare_methods.R
-eb5fedeeee16cdf493eb0ec3bcf9c815 *README.md
+c31566fbe04da7e1b1ca57ae88dde24d *README.md
 be0155555650b9a09968e11ec9f4c996 *build/vignette.rds
 5359d699513eedc3ade641a94b843d98 *inst/doc/Examples.R
 db63a00c54ba005dab6e4b351561ef86 *inst/doc/Examples.Rmd
@@ -19,7 +19,7 @@ bfe1fea39e0e107e6546686a84a92d0d *inst/extdata/NCBI_stub.tsv
 1d06dae2e7f63d7998929c7e97ae7e8f *man/annotate.Rd
 410d7aff35b5b3ccefbdbd42f24e969c *man/dedupe.Rd
 560bb326b657b42e0c47e66dcb5f8a6e *man/download_gbif.Rd
-2c88f7970b9ed12a5db786898686713b *man/download_ncbi.Rd
+6146a384f2f48fa5ae9558c825551624 *man/download_ncbi.Rd
 414bb5ee747844fd04a6d0bd91da5278 *man/fuzzy_search.Rd
 f297f0503c22561f501bc336d1ed0daf *man/get_inconsistencies.Rd
 dd5ba04dd7efff6448878a6bc8150b82 *man/get_lineages.Rd

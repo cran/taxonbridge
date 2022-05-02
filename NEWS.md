@@ -1,3 +1,8 @@
+# taxonbridge 1.2.1
+
+* Fixed bug in `download_ncbi()` method
+* Updated `download_ncbi()` and `download_gbif()` with file checks
+
 # taxonbridge 1.2.0
 
 * Load methods now convert all columns to character data type
