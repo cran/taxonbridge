@@ -1,13 +1,14 @@
-b93dbee4f8d188b9799e5176a4d639a9 *DESCRIPTION
+a839cc728bcbaa91cab7f613a7339834 *DESCRIPTION
 498b392fa6c504c7031d2a8b0360fceb *NAMESPACE
-d15824c901fc05dc9f3b1a8b399b7ec1 *NEWS.md
+a2bc447804a58148f2c5d28fb2d6eec2 *NEWS.md
 761ce2e64fddc51ce1ac10b7e0edc272 *R/get_methods.R
 f8768b434dd25b8129d564e9a69fb868 *R/helper_methods.R
-c75e7629489f7dde378484e403a006e4 *R/load_methods.R
+231d4f319bef7506d09a339c879dd009 *R/load_methods.R
 31130d856aff312b1eb88dea7de6e95b *R/plot_methods.R
 a8d1344ad8dbfa1869cf734163af7966 *R/prepare_methods.R
-c31566fbe04da7e1b1ca57ae88dde24d *README.md
+963754d8c0cffe8e0bdc7a194fb19c60 *README.md
 be0155555650b9a09968e11ec9f4c996 *build/vignette.rds
+5de127dda8d2a797816a94e15f824547 *inst/CITATION
 5359d699513eedc3ade641a94b843d98 *inst/doc/Examples.R
 db63a00c54ba005dab6e4b351561ef86 *inst/doc/Examples.Rmd
 321336594dd59613aa06004deb375633 *inst/doc/Examples.html
@@ -19,7 +20,7 @@ bfe1fea39e0e107e6546686a84a92d0d *inst/extdata/NCBI_stub.tsv
 1d06dae2e7f63d7998929c7e97ae7e8f *man/annotate.Rd
 410d7aff35b5b3ccefbdbd42f24e969c *man/dedupe.Rd
 560bb326b657b42e0c47e66dcb5f8a6e *man/download_gbif.Rd
-6146a384f2f48fa5ae9558c825551624 *man/download_ncbi.Rd
+109f2fde8e0bc19dc66c746f22447485 *man/download_ncbi.Rd
 414bb5ee747844fd04a6d0bd91da5278 *man/fuzzy_search.Rd
 f297f0503c22561f501bc336d1ed0daf *man/get_inconsistencies.Rd
 dd5ba04dd7efff6448878a6bc8150b82 *man/get_lineages.Rd
@@ -28,7 +29,7 @@ c903e7e37cec612228b8b0381b768fc0 *man/get_taxa.Rd
 b0098c35ee6b7bec30fdafd41e6341c4 *man/get_validity.Rd
 1d18b8d34460aea4e1cbf6568027ed87 *man/load_population.Rd
 45510df30a22d40ea20891fd6e27b4b7 *man/load_sample.Rd
-4ce9ace141aae9a2e80cd4cb6e46b55b *man/load_taxonomies.Rd
+d8af47cc5330a1a38b3988d84992bb2a *man/load_taxonomies.Rd
 3be7c9cbadfdc1460c3df724a913160c *man/plot_mdb.Rd
 0d0953089cb9e28237b810238993310f *man/prepare_comparable_rank_dist.Rd
 fa89d963f3ce46e08c8b2a7b1fc5a465 *man/prepare_rank_dist.Rd
